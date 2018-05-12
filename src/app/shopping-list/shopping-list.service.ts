@@ -23,7 +23,7 @@ export class ShoppingListService {
   }
 
   addIngredients(ingredients: Ingredient[]) {
-    // for (let ingredient of ingredients) {
+    // for (let ingredient of shoppingListState) {
     //   this.addIngredient(ingredient);
     // }
     this.ingredients.push(...ingredients);
