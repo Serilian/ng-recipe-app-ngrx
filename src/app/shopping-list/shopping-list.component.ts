@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import * as fromShoppingList from '../shopping-list/ngrx/shopping-list-reducers';
+import * as ShoppingListActions from '../shopping-list/ngrx/shopping-list.actions';
 
 @Component({
   selector: 'app-shopping-list',
@@ -16,7 +16,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   shoppingListState: Observable<{ingredients: Ingredient[]}>;
   private subscription: Subscription;
 
-  constructor(private store: Store<fromShoppingList.AppState>, private slService: ShoppingListService) { }
+  constructor(private store: Store<fromShoppingList.AppState>) { }
 
   ngOnInit() {
     this.shoppingListState = this.store.select('shoppingList');
@@ -29,10 +29,10 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(index: number) {
-    this.slService.startedEditing.next(index);
+    this.store.dispatch(new ShoppingListActions.StartEdit(index));
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }
