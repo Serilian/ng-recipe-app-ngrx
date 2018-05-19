@@ -1,4 +1,3 @@
-import {Ingredient} from '../../shared/ingredient.model';
 import * as authActions from '../store/auth.actions';
 
 
@@ -12,13 +11,24 @@ const initialState = {
   authenticated: false
 };
 
-export function authReducer(state = initialState, action: authActions.authActions) {
+export function authReducer (state = initialState, action: authActions.authActions) {
   switch (action.type) {
-    case
+    case authActions.SIGNUP:
       return {
-
+        ...state,
+        authenticated: true
       };
-
+    case authActions.SIGNIN:
+      return {
+        ...state,
+        authenticated: true
+      };
+    case authActions.LOGOUT:
+      return {
+        ...state,
+        authenticated: false,
+        token: null
+      };
     default:
       return state;
   }
