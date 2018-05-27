@@ -20,12 +20,12 @@ export class AddRecipe implements Action {
 
 export class UpdateRecipe implements Action {
   readonly type: string = UPDATE_RECIPE;
-  public payload: { index: number, updatedRecipe: Recipe };
+  public payload: {index: number, updatedRecipe: Recipe };
 }
 
 export class DeleteRecipe implements Action {
   readonly type: string = DELETE_RECIPE;
-  public payload: number;
+  constructor(public payload: number) {}
 }
 
 export type RecipeActions =
