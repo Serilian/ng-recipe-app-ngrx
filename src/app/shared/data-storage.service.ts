@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
 import 'rxjs/Rx';
 
 import { RecipeService } from '../recipes/recipe.service';
 import { Recipe } from '../recipes/recipe.model';
-import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class DataStorageService {
   constructor(private httpClient: HttpClient,
               private recipeService: RecipeService,
-              private authService: AuthService) {
+              ) {
   }
 
   storeRecipes() {
@@ -21,7 +20,8 @@ export class DataStorageService {
     //   params: new HttpParams().set('auth', token)
     //   // headers: headers
     // });
-    const req = new HttpRequest('PUT', 'https://ng-recipe-book-9f137.firebaseio.com/recipeState.json', this.recipeService.getRecipes(), {reportProgress: true});
+    const req = new HttpRequest('PUT', 'https://ng-recipe-book-9f137.firebaseio.com/recipeState.json',
+      this.recipeService.getRecipes(), {reportProgress: true});
     return this.httpClient.request(req);
   }
 
@@ -34,7 +34,7 @@ export class DataStorageService {
       .map(
         (recipes) => {
           console.log(recipes);
-          for (let recipe of recipes) {
+          for (const recipe of recipes) {
             if (!recipe['shoppingListState']) {
               recipe['shoppingListState'] = [];
             }
