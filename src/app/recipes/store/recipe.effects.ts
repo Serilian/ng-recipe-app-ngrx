@@ -6,6 +6,7 @@ import {HttpClient, HttpRequest} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Store} from '@ngrx/store';
 import {dispatch} from 'rxjs/internal-compatibility';
+import 'rxjs-compat/add/operator/withLatestFrom';
 
 @Injectable()
 export class RecipeEffects {

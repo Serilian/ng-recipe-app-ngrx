@@ -17,7 +17,6 @@ export class RecipeEditComponent implements OnInit {
   recipeForm: FormGroup;
 
   constructor(private route: ActivatedRoute,
-              private recipeService: RecipeService,
               private router: Router,
               private store: Store<fromRecipe.FeaturedState>) {
   }
@@ -34,14 +33,8 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    // const newRecipe = new Recipe(
-    //   this.recipeForm.value['name'],
-    //   this.recipeForm.value['description'],
-    //   this.recipeForm.value['imagePath'],
-    //   this.recipeForm.value['shoppingListState']);
     if (this.editMode) {
       this.store.dispatch(new RecipeActions.UpdateRecipe({index: this.id, updatedRecipe: this.recipeForm.value}));
-      // this.recipeService.updateRecipe(this.id, this.recipeForm.value);
     } else {
       this.store.dispatch(new RecipeActions.AddRecipe(this.recipeForm.value));
       // this.recipeService.addRecipe(this.recipeForm.value);
@@ -76,7 +69,6 @@ export class RecipeEditComponent implements OnInit {
     const recipeIngredients = new FormArray([]);
 
     if (this.editMode) {
-      // const recipe = this.recipeService.getRecipe(this.id);
       this.store.select('recipes')
         .take(1)
         .subscribe(
