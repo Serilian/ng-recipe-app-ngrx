@@ -5,6 +5,7 @@ import {RecipeService} from '../recipe.service';
 import {Store} from '@ngrx/store';
 import * as RecipeActions from '../store/recipe.actions';
 import * as fromRecipe from '../store/recipe.reducers';
+import 'rxjs-compat/add/operator/take';
 
 @Component({
   selector: 'app-recipe-edit',
